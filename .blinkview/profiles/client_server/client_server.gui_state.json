@@ -1,0 +1,144 @@
+{
+    "window_geometry": {
+        "geometry": "AdnQywADAAAAAA8BAAAAAAAAEzYAAANSAAAPAQAAAB8AABM2AAADUgAAAAEAAAAABaAAAA8BAAAAHwAAEzYAAANS",
+        "frame_pos": [
+            3841,
+            0
+        ],
+        "client_size": [
+            1078,
+            820
+        ]
+    },
+    "window_state": "AAAA/wAAAAD9AAAAAQAAAAAAAAEAAAADH/wCAAAAAvsAAAAWAFMAbwB1AHIAYwBlAHMARABvAGMAawEAAAAdAAAAvgAAAIcA////+wAAABoAUABpAHAAZQBsAGkAbgBlAHMARABvAGMAawEAAADfAAACXQAAAIcA////AAADNAAAAx8AAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAf////8BAAAAAP////8AAAAAAAAAAA==",
+    "sources_visible": true,
+    "pipelines_visible": true,
+    "open_tabs": [
+        {
+            "class": "TelemetryTable",
+            "name": "Live Telemetry",
+            "params": {
+                "filter_pattern": "",
+                "show_device_column": true,
+                "filtered_device": null,
+                "filtered_module": null,
+                "filtered_module_children": false,
+                "sort_column": 0,
+                "sort_order": 0,
+                "hide_empty": true,
+                "show_non_essential": false
+            }
+        }
+    ],
+    "floating_windows": [
+        {
+            "class": "TelemetryPlotter",
+            "name": "Graph: rng",
+            "window_geometry": {
+                "geometry": "AdnQywADAAAAABShAAAAAAAAF24AAANSAAAUoQAAAB8AABduAAADUgAAAAMAAAAABaAAABShAAAAHwAAF24AAANS",
+                "frame_pos": [
+                    5281,
+                    0
+                ],
+                "client_size": [
+                    718,
+                    820
+                ]
+            },
+            "params": {
+                "modules": [
+                    "client.ui.generator.rng",
+                    "server.server.generator.rng"
+                ],
+                "is_split": true,
+                "series": [
+                    {
+                        "module": "client.ui.generator.rng",
+                        "index": 0,
+                        "name": "rng",
+                        "color": "#00ff00",
+                        "visible": true,
+                        "is_discrete": false
+                    },
+                    {
+                        "module": "server.server.generator.rng",
+                        "index": 0,
+                        "name": "rng",
+                        "color": "#00aaff",
+                        "visible": true,
+                        "is_discrete": true
+                    }
+                ],
+                "view_duration": "60s",
+                "show_overview": true,
+                "update_freq": "1 Hz"
+            },
+            "reattach_on_close": false
+        },
+        {
+            "class": "LogViewerWidget",
+            "name": "Live Logs",
+            "window_geometry": {
+                "geometry": "AdnQywADAAAAABShAAADVAAAGj4AAAaoAAAUoQAAA3MAABo+AAAGqAAAAAMAAAAABaAAABShAAADcwAAGj4AAAao",
+                "frame_pos": [
+                    5281,
+                    852
+                ],
+                "client_size": [
+                    1438,
+                    822
+                ]
+            },
+            "params": {
+                "allowed_device": null,
+                "filtered_module": null,
+                "filtered_module_children": false,
+                "view_state": {
+                    "show_ts": true,
+                    "show_dev": true,
+                    "show_lvl": true,
+                    "show_mod": true,
+                    "show_date": false,
+                    "show_rx_ts": false,
+                    "ts_precision": 6,
+                    "show_module_filter": true,
+                    "show_telemetry": true,
+                    "splitter_sizes": [
+                        380,
+                        561,
+                        471
+                    ]
+                },
+                "log_level": "ALL",
+                "filter_sidebar": {
+                    "enabled": true,
+                    "module_filters": {},
+                    "show_non_essential": false
+                },
+                "show_hidden": false
+            },
+            "reattach_on_close": false
+        },
+        {
+            "class": "TelemetryWatch",
+            "name": "Watch Variables",
+            "window_geometry": {
+                "geometry": "AdnQywADAAAAABM5AAAAAAAAFJ4AAANSAAATOQAAAB8AABSeAAADUgAAAAEAAAAABaAAABM5AAAAHwAAFJ4AAANS",
+                "frame_pos": [
+                    4921,
+                    0
+                ],
+                "client_size": [
+                    358,
+                    820
+                ]
+            },
+            "params": {
+                "tab_name": "Watch Variables",
+                "id": "watch_e9bcb19c"
+            },
+            "reattach_on_close": false
+        }
+    ],
+    "current_tab_index": 0
+}

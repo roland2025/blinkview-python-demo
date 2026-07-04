@@ -1,0 +1,149 @@
+{
+    "version": "0.2",
+    "sources": {
+        "src_01f51a8b": {
+            "enabled": true,
+            "type": "udp",
+            "name": "network",
+            "logging": {
+                "type": "default",
+                "enabled": true,
+                "processor": {
+                    "type": "binary"
+                }
+            },
+            "port": 5140
+        },
+        "src_81d58a0c": {
+            "enabled": true,
+            "type": "tcp_server",
+            "name": "network_tcp",
+            "port": 5141,
+            "logging": {
+                "type": "default",
+                "enabled": true,
+                "processor": {
+                    "type": "binary"
+                }
+            }
+        }
+    },
+    "pipelines": {
+        "pipe_2d88035b": {
+            "enabled": true,
+            "type": "serial_default",
+            "name": "python",
+            "sources_": [
+                "src_01f51a8b"
+            ],
+            "frame_parser": {
+                "type": "default",
+                "parser_errors_hidden": false,
+                "steps": [
+                    {
+                        "type": "log_level_python"
+                    },
+                    {
+                        "type": "timestamp_idf_v1",
+                        "precision": 3,
+                        "unix_timestamp": true
+                    },
+                    {
+                        "type": "module_name_normalizer",
+                        "max_depth": 8,
+                        "max_length": 64
+                    }
+                ],
+                "filter_squash_spaces": false
+            },
+            "frame_decoder": {
+                "type": "line_decoder",
+                "frame_errors_hidden": false,
+                "filter_trim_r": true,
+                "filter_printable": false,
+                "filter_ansi": false,
+                "frame_length_dynamic": true,
+                "frame_length": 0,
+                "frame_length_minimum": 1,
+                "frame_length_maximum": 1024
+            },
+            "max_batch": 2000
+        },
+        "pipe_cb7ac729": {
+            "enabled": false,
+            "type": "serial_default",
+            "name": "raw",
+            "frame_parser": {
+                "type": "default",
+                "parser_errors_hidden": false,
+                "steps": [],
+                "filter_squash_spaces": false
+            },
+            "max_batch": 2000,
+            "sources_": [
+                "src_01f51a8b"
+            ],
+            "frame_decoder": {
+                "type": "line_decoder",
+                "frame_errors_hidden": false,
+                "filter_trim_r": true,
+                "filter_printable": false,
+                "filter_ansi": false,
+                "frame_length_dynamic": true,
+                "frame_length": 0,
+                "frame_length_minimum": 1,
+                "frame_length_maximum": 1024
+            }
+        },
+        "pipe_0ca746c5": {
+            "enabled": true,
+            "type": "serial_default",
+            "name": "tcp",
+            "frame_decoder": {
+                "type": "line_decoder",
+                "frame_errors_hidden": false,
+                "frame_delimiter": 0,
+                "filter_trim_r": true,
+                "filter_printable": false,
+                "filter_ansi": false,
+                "frame_length_dynamic": true,
+                "frame_length": 0,
+                "frame_length_minimum": 10,
+                "frame_length_maximum": 1024
+            },
+            "max_batch": 2000,
+            "sources_": [
+                "src_81d58a0c"
+            ],
+            "frame_parser": {
+                "type": "default",
+                "parser_errors_hidden": false,
+                "steps": [
+                    {
+                        "type": "log_level_python"
+                    },
+                    {
+                        "type": "timestamp_idf_v1",
+                        "precision": 3,
+                        "unix_timestamp": true
+                    },
+                    {
+                        "type": "module_name_normalizer",
+                        "max_depth": 8,
+                        "max_length": 64
+                    }
+                ],
+                "filter_squash_spaces": false
+            }
+        }
+    },
+    "plugins": {},
+    "reorder": {
+        "enabled": true,
+        "type": "default"
+    },
+    "central": {
+        "enabled": true,
+        "type": "default"
+    }
+}

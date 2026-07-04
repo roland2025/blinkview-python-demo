@@ -1,0 +1,52 @@
+{
+    "window_geometry": {
+        "geometry": "AdnQywADAAAAAA8BAAAAAAAAFJ4AAANSAAAPAQAAAB8AABSeAAADUgAAAAEAAAAABaAAAA8BAAAAHwAAFJ4AAANS",
+        "frame_pos": [
+            3841,
+            0
+        ],
+        "client_size": [
+            1438,
+            820
+        ]
+    },
+    "window_state": "AAAA/wAAAAD9AAAAAQAAAAAAAAEAAAADH/wCAAAAAvsAAAAWAFMAbwB1AHIAYwBlAHMARABvAGMAawEAAAAdAAABagAAAIcA////+wAAABoAUABpAHAAZQBsAGkAbgBlAHMARABvAGMAawEAAAGLAAABsQAAAIcA////AAAEnAAAAx8AAAAEAAAABAAAAAgAAAAI/AAAAAEAAAACAAAAAf////8BAAAAAP////8AAAAAAAAAAA==",
+    "sources_visible": true,
+    "pipelines_visible": true,
+    "open_tabs": [
+        {
+            "class": "LogViewerWidget",
+            "name": "Live Logs",
+            "params": {
+                "allowed_device": null,
+                "filtered_module": null,
+                "filtered_module_children": false,
+                "view_state": {
+                    "show_ts": true,
+                    "show_dev": true,
+                    "show_lvl": true,
+                    "show_mod": true,
+                    "show_date": false,
+                    "show_rx_ts": false,
+                    "ts_precision": 3,
+                    "show_module_filter": false,
+                    "show_telemetry": false,
+                    "splitter_sizes": [
+                        0,
+                        1174,
+                        0
+                    ]
+                },
+                "log_level": "ALL",
+                "filter_sidebar": {
+                    "enabled": false,
+                    "module_filters": {},
+                    "show_non_essential": false
+                },
+                "show_hidden": false
+            }
+        }
+    ],
+    "floating_windows": [],
+    "current_tab_index": 0
+}

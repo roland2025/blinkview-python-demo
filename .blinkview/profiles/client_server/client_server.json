@@ -1,0 +1,134 @@
+{
+    "version": "0.2",
+    "sources": {
+        "src_f7bc2287": {
+            "enabled": true,
+            "type": "tcp_server",
+            "name": "backend_tcp",
+            "port": 5143,
+            "logging": {
+                "type": "default",
+                "enabled": true,
+                "processor": {
+                    "type": "binary"
+                }
+            },
+            "buffer_size": 2097120
+        },
+        "src_870a68ec": {
+            "enabled": true,
+            "type": "tcp_server",
+            "name": "client_tcp",
+            "logging": {
+                "type": "default",
+                "enabled": true,
+                "processor": {
+                    "type": "binary"
+                }
+            },
+            "port": 5144,
+            "buffer_size": 2097120
+        }
+    },
+    "pipelines": {
+        "pipe_31c72cfb": {
+            "enabled": true,
+            "type": "serial_default",
+            "name": "server",
+            "sources_": [
+                "src_f7bc2287"
+            ],
+            "frame_parser": {
+                "type": "default",
+                "parser_errors_hidden": false,
+                "steps": [
+                    {
+                        "type": "log_level_python"
+                    },
+                    {
+                        "type": "timestamp_integer",
+                        "unix_timestamp": true,
+                        "precision": 3
+                    },
+                    {
+                        "type": "module_name_normalizer",
+                        "max_depth": 8,
+                        "max_length": 64
+                    }
+                ],
+                "filter_squash_spaces": false
+            },
+            "max_batch": 2000,
+            "frame_decoder": {
+                "type": "line_decoder",
+                "frame_errors_hidden": false,
+                "filter_trim_r": true,
+                "filter_printable": false,
+                "filter_ansi": false,
+                "frame_length_dynamic": true,
+                "frame_length": 0,
+                "frame_length_minimum": 1,
+                "frame_length_maximum": 1024,
+                "frame_delimiter": 0
+            }
+        },
+        "pipe_7bc5ad0d": {
+            "enabled": true,
+            "type": "serial_default",
+            "name": "client",
+            "sources_": [
+                "src_870a68ec"
+            ],
+            "frame_parser": {
+                "type": "default",
+                "parser_errors_hidden": false,
+                "steps": [
+                    {
+                        "type": "log_level_python"
+                    },
+                    {
+                        "type": "timestamp_integer",
+                        "precision": 3,
+                        "unix_timestamp": true
+                    },
+                    {
+                        "type": "module_name_normalizer",
+                        "max_depth": 8,
+                        "max_length": 64
+                    }
+                ],
+                "filter_squash_spaces": false
+            },
+            "max_batch": 2000,
+            "frame_decoder": {
+                "type": "line_decoder",
+                "frame_errors_hidden": false,
+                "filter_trim_r": true,
+                "filter_printable": false,
+                "filter_ansi": false,
+                "frame_length_dynamic": true,
+                "frame_length": 0,
+                "frame_length_minimum": 1,
+                "frame_length_maximum": 1024,
+                "frame_delimiter": 0
+            }
+        }
+    },
+    "plugins": {},
+    "reorder": {
+        "enabled": true,
+        "type": "default",
+        "delay": 500
+    },
+    "central": {
+        "enabled": true,
+        "type": "default",
+        "logging": {
+            "type": "default",
+            "enabled": true,
+            "processor": {
+                "type": "log_row"
+            }
+        }
+    }
+}

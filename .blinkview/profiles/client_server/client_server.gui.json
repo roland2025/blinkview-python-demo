@@ -1,0 +1,232 @@
+{
+    "watches": {
+        "watch_e9bcb19c": {
+            "id": "watch_e9bcb19c",
+            "name": "Variables",
+            "tab_name": "Watch Variables",
+            "default_target": "",
+            "command_history": [],
+            "entries": [
+                {
+                    "type": "section",
+                    "label": "Client connection",
+                    "collapsed": false
+                },
+                {
+                    "type": "row",
+                    "key": "row_aa8f14c1",
+                    "label": "Open",
+                    "modules": [
+                        "system.source.client_tcp.state.open"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "key": "row_de39bcc7",
+                    "label": "Link",
+                    "modules": [
+                        "system.source.client_tcp.link"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "section",
+                    "label": "Client generator",
+                    "collapsed": false
+                },
+                {
+                    "type": "row",
+                    "label": "enabled",
+                    "key": "row_f449602b",
+                    "modules": [
+                        "client.ui.keys.remote.generator_enabled"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "interval ms",
+                    "key": "row_2cde6087",
+                    "modules": [
+                        "client.ui.keys.remote.generator_interval"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "msgs / sec",
+                    "key": "row_e2cb0eba",
+                    "modules": [
+                        "client.ui.keys.remote.generator_msgs"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "rng",
+                    "key": "row_1a32b4a7",
+                    "modules": [
+                        "client.ui.generator.rng"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "data",
+                    "key": "row_1795e7c6",
+                    "modules": [
+                        "client.ui.generator.data"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "section",
+                    "label": "Backend connection",
+                    "collapsed": false
+                },
+                {
+                    "type": "row",
+                    "label": "Open",
+                    "key": "row_3b2c86b8",
+                    "modules": [
+                        "system.source.backend_tcp.state.open"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "Link",
+                    "key": "row_5cbba92e",
+                    "modules": [
+                        "system.source.backend_tcp.link"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "section",
+                    "label": "Backend generator",
+                    "collapsed": false
+                },
+                {
+                    "type": "row",
+                    "label": "enabled",
+                    "key": "row_15e642a3",
+                    "modules": [
+                        "server.server.keys.generator_enabled"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "interval ms",
+                    "key": "row_bcf3ec01",
+                    "modules": [
+                        "server.server.keys.generator_interval"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "msgs / sec",
+                    "key": "row_ec627ed9",
+                    "modules": [
+                        "server.server.keys.generator_msgs"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "rng",
+                    "key": "row_7621baba",
+                    "modules": [
+                        "server.server.generator.rng"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "data",
+                    "key": "row_eaac331d",
+                    "modules": [
+                        "server.server.generator.data"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "section",
+                    "label": "Widgets",
+                    "collapsed": false
+                },
+                {
+                    "type": "row",
+                    "key": "row_ec8be6d1",
+                    "label": "button",
+                    "modules": [
+                        "client.ui.keys.local.button",
+                        "client.ui.keys.remote.button",
+                        "server.server.keys.button"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "button_state",
+                    "key": "row_c4608bcc",
+                    "modules": [
+                        "client.ui.keys.local.button_state",
+                        "client.ui.keys.remote.button_state",
+                        "server.server.keys.button_state"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "label": "slider",
+                    "key": "row_968c7ccb",
+                    "modules": [
+                        "client.ui.keys.local.slider",
+                        "client.ui.keys.remote.slider",
+                        "server.server.keys.slider"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "key": "row_519fa218",
+                    "label": "text",
+                    "modules": [
+                        "client.ui.keys.local.text",
+                        "client.ui.keys.remote.text",
+                        "server.server.keys.text"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "key": "row_912f4a48",
+                    "label": "combobox",
+                    "modules": [
+                        "client.ui.keys.local.combobox",
+                        "client.ui.keys.remote.combobox",
+                        "server.server.keys.combobox"
+                    ],
+                    "is_expanded": false
+                },
+                {
+                    "type": "row",
+                    "key": "row_ef6a42f1",
+                    "label": "checkbox",
+                    "modules": [
+                        "client.ui.keys.local.checkbox",
+                        "client.ui.keys.remote.checkbox",
+                        "server.server.keys.checkbox",
+                        "server.server.generator.rng"
+                    ],
+                    "is_expanded": false
+                }
+            ],
+            "device_cache": {}
+        }
+    }
+}

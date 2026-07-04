@@ -1,0 +1,35 @@
+[project]
+name = "blinkview-python-demo"
+version = "0.1.0"
+description = "BlinkView logging over network example"
+license = "MPL-2.0"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "qtpy>=2.4.3",
+    "pyside6>=6.11.1",
+]
+
+[tool.uv]
+package = true
+default-groups = []
+
+[tool.uv.workspace]
+members = ["."]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.15.20",
+]
+
+[tool.ruff]
+target-version = "py310"
+
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "G"]
+
+[project.scripts]
+client = "qt_demo.main:main"
+backend = "backend_demo.main:main"
