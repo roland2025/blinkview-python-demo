@@ -17,7 +17,7 @@ class NetworkWorker(QObject):
     disconnected = Signal()
     event_received = Signal(dict)
 
-    def __init__(self, host="127.0.0.1", port=65432, link_logger=None, remote_base_logger=None):
+    def __init__(self, host="127.0.0.1", port=65500, link_logger=None, remote_base_logger=None):
         super().__init__()
         self.host = host
         self.port = port

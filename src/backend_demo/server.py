@@ -12,7 +12,7 @@ from shared_utils.log_generator import LogGenerator
 
 
 class BackendServer:
-    def __init__(self, logger, host="127.0.0.1", port=65432):
+    def __init__(self, logger, host="127.0.0.1", port=65500):
         self.host = host
         self.port = port
         self.server_socket = None

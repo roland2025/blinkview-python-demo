@@ -2,6 +2,10 @@
 # Copyright (c) 2026 Roland Uuesoo
 
 import logging
+import os
+import signal
+import subprocess
+import sys
 import threading
 import time
 
@@ -218,7 +222,7 @@ class QtClientApp(QMainWindow):
 
         self.network_thread = QThread()
         self.worker = NetworkWorker(
-            host="127.0.0.1", port=65432, link_logger=self.link_logger, remote_base_logger=self.remote_base_logger
+            host="127.0.0.1", port=65500, link_logger=self.link_logger, remote_base_logger=self.remote_base_logger
         )
         self.worker.moveToThread(self.network_thread)
 
@@ -388,14 +392,18 @@ class QtClientApp(QMainWindow):
         if self.backend_process and self.backend_process.poll() is None:
             return  # Already running
 
-        import subprocess
-        import sys
-
         self.link_logger.info("Starting built-in headless backend process...")
+
+        # Create a session/process group on Linux to guarantee signal delivery
+        kwargs = {}
+        if sys.platform != "win32":
+            kwargs["preexec_fn"] = os.setsid
+
         self.backend_process = subprocess.Popen(
             [sys.executable, "-m", "backend_demo.main"],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
+            **kwargs
         )
         self.btn_toggle_backend.setText("Stop backend")
         self.btn_toggle_backend.setStyleSheet("font-weight: bold; color: darkred;")
@@ -403,11 +411,30 @@ class QtClientApp(QMainWindow):
     def stop_headless_backend(self):
         if self.backend_process and self.backend_process.poll() is None:
             self.link_logger.info("Stopping built-in headless backend process...")
-            self.backend_process.terminate()
+
             try:
+                if sys.platform != "win32":
+                    # Replicate System Monitor/kill command behavior across the process group
+                    pgid = os.getpgid(self.backend_process.pid)
+                    os.killpg(pgid, signal.SIGTERM)
+                else:
+                    self.backend_process.terminate()
+
+                # Await graceful exit
                 self.backend_process.wait(timeout=2)
-            except Exception:
-                self.backend_process.kill()
+
+            except subprocess.TimeoutExpired:
+                self.link_logger.warning("Backend missed SIGTERM. Sending SIGKILL...")
+                try:
+                    if sys.platform != "win32":
+                        os.killpg(os.getpgid(self.backend_process.pid), signal.SIGKILL)
+                    else:
+                        self.backend_process.kill()
+                    self.backend_process.wait(timeout=1)
+                except Exception as e:
+                    self.link_logger.error("Force kill failed: %s", e)
+            except Exception as e:
+                self.link_logger.error("Error during backend termination: %s", e)
 
         self.backend_process = None
         self.btn_toggle_backend.setChecked(False)
