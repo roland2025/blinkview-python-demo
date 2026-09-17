@@ -7,6 +7,24 @@ import socket
 import threading
 
 
+def enable_tcp_keepalive(sock, idle=5, interval=2, count=3):
+    """
+    Turns on TCP keepalive probing with an aggressive schedule.
+    """
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
+
+    if hasattr(socket, "TCP_KEEPIDLE"):
+        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPIDLE, idle)
+    elif hasattr(socket, "TCP_KEEPALIVE"):  # macOS
+        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPALIVE, idle)
+
+    if hasattr(socket, "TCP_KEEPINTVL"):
+        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPINTVL, interval)
+
+    if hasattr(socket, "TCP_KEEPCNT"):
+        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_KEEPCNT, count)
+
+
 class NullDelimitedTCPHandler(logging.Handler):
     """
     A non-blocking logging handler that batches logs into a bytearray, flushing them
@@ -41,6 +59,7 @@ class NullDelimitedTCPHandler(logging.Handler):
         try:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.settimeout(self.timeout)
+            enable_tcp_keepalive(sock)
             sock.connect((self.host, self.port))
             self.sock = sock
             return True

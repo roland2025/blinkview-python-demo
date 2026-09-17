@@ -7,7 +7,7 @@ import struct
 import threading
 
 from qtpy.QtCore import QObject, QTimer, Signal, Slot
-from qtpy.QtNetwork import QTcpSocket
+from qtpy.QtNetwork import QAbstractSocket, QTcpSocket
 
 
 class NetworkWorker(QObject):
@@ -52,6 +52,7 @@ class NetworkWorker(QObject):
     @Slot()
     def start_connection(self):
         self.socket = QTcpSocket(self)
+        self.socket.setSocketOption(QAbstractSocket.KeepAliveOption, 1)
         self.socket.readyRead.connect(self.on_ready_read)
         self.socket.connected.connect(self._on_connected)
         self.socket.disconnected.connect(self._on_disconnected)

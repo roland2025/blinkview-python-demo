@@ -36,6 +36,7 @@ from shared_utils.log_generator import LogGenerator
 class QtClientApp(QMainWindow):
     request_send_event = Signal(dict)
     request_update_local_gen = Signal(bool, int, int)
+    request_stop_worker = Signal()
 
     def __init__(self, logger):
         super().__init__()
@@ -231,6 +232,7 @@ class QtClientApp(QMainWindow):
         self.network_thread.started.connect(self.worker.start_connection)
         self.request_send_event.connect(self.worker.send_json_event)
         self.request_update_local_gen.connect(self.local_generator.update_configuration)
+        self.request_stop_worker.connect(self.worker.stop)
 
         self.worker.connected.connect(self.on_connected_ui)
         self.worker.disconnected.connect(self.on_disconnected_ui)
@@ -374,7 +376,7 @@ class QtClientApp(QMainWindow):
     def closeEvent(self, event):
         self.local_generator.stop()
 
-        self.worker.stop()
+        self.request_stop_worker.emit()
         self.network_thread.quit()
         self.network_thread.wait()
 

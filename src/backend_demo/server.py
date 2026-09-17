@@ -9,6 +9,7 @@ import sys
 import threading
 
 from shared_utils.log_generator import LogGenerator
+from shared_utils.tcp_logger import enable_tcp_keepalive
 
 
 class BackendServer:
@@ -70,6 +71,7 @@ class BackendServer:
         while self.running:
             try:
                 client_sock, addr = self.server_socket.accept()
+                enable_tcp_keepalive(client_sock)
                 self.link_logger.info("New connection handshake accepted from edge node: %s", addr)
                 threading.Thread(target=self._handle_client, args=(client_sock,), daemon=True).start()
             except Exception:
