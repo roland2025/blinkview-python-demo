@@ -7,6 +7,24 @@ import socket
 import threading
 
 
+def disable_expensive_logrecord_fields():
+    """
+    Disables optional LogRecord metadata that is never read by this project's
+    handlers, to cut per-call overhead in the standard logging pipeline.
+
+    Module-level flags, so this only needs to run once, before the first log call.
+    """
+    logging.logThreads = False
+    logging.logProcesses = False
+    logging.logMultiprocessing = False
+    logging.logAsyncioTasks = False
+
+    # Skip the findCaller() stack walk used to populate %(filename)s/%(lineno)d/
+    # %(funcName)s. Fastest option, but any handler's formatter (e.g. a future
+    # FileHandler) will see "(unknown file)"/0/"(unknown function)" instead.
+    logging._srcfile = None
+
+
 def enable_tcp_keepalive(sock, idle=5, interval=2, count=3):
     """
     Turns on TCP keepalive probing with an aggressive schedule.
@@ -72,6 +90,12 @@ class NullDelimitedTCPHandler(logging.Handler):
                     pass
             self.sock = None
             return False
+
+    def handle(self, record):
+        rv = self.filter(record)
+        if rv:
+            self.emit(record)
+        return rv
 
     def emit(self, record):
         """Called by the application thread. Instantly hands off the log and returns."""
@@ -235,6 +259,8 @@ def setup_tcp_logger(
     """
     Sets up a logger configured to stream null-delimited batched byte frames over TCP.
     """
+    disable_expensive_logrecord_fields()
+
     logger = logging.getLogger(logger_name)
 
     if isinstance(log_level, str):
